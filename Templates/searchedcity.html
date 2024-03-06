@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if city_info %}{{ city_info[3] }}{% else %}City Not Found{% endif %}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    {% if city_info %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>{{ city_info[3] }}</h3>
+            <div class="row">
+                <div class="col">
+                    <p>Temperature: <span class="temperature">{{ city_info[0] }}</span></p>
+                </div>
+                <div class="col">
+                    <p>Humidity: <span class="humidity">{{ city_info[1] }}</span></p>
+                </div>
+                <div class="col">
+                    <p>Conditions: <span class="conditions">{{ city_info[2] }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        City not found
+    </div>
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                alert("City not found!");
+            }, 1000); // Change the delay time as needed (500 milliseconds = 1 second)
+        });
+    </script>
+    {% endif %}
+</div>
+
+{% endblock %}

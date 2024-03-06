@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Random Cities{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+   {% for city_key, city_info in cities.items() %}
+     {% if loop.index <= 5 %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>{{ city_info['name'] }}</h3>
+            <div class="row">
+                <div class="col">
+                    <p>Temperature: <span class="temperature">{{ city_info['temp_current'] }}</span></p>
+                </div>
+                <div class="col">
+                    <p>Humidity: <span class="humidity">{{ city_info['humidity'] }}</span></p>
+                </div>
+                <div class="col">
+                    <p>Conditions: <span class="conditions">{{ city_info['conditions'] }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+   {% endfor %}
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col text-center">
+            <form method="post" action="{{ url_for('randomcities') }}">
+                <button class="btn btn-primary" type="submit" name="action" value="generate">Generate Random Cities</button>
+                <button class="btn btn-secondary" type="submit" name="action" value="refresh">Refresh</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h3>Average Temperature: <span class="temperature">{{ cities['Average']['Average_temp'] }}</span></h3>
+                </div>
+                <div class="col">
+                    <div class="city-box">
+                        <h3>Coldest City: <span class="coldest-city">{{ cities['Average']['Coldest_city'] }}</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
