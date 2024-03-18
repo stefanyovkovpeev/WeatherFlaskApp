@@ -3,6 +3,7 @@ import json
 import gzip
 import random
 import requests
+from decouple import config
 
 
 class App:
@@ -41,7 +42,7 @@ class App:
         for city in cities:
             params = {
                 'q': city,
-                'appid': "***",
+                'appid': config('YOUR_API_KEY'),
                 'units': 'metric'
             }
             response = requests.get(base_url, params=params)
@@ -75,7 +76,7 @@ class App:
             base_url = "http://api.openweathermap.org/data/2.5/weather"
             params = {
                 'q': city,
-                'appid': "***",
+                'appid': config('YOUR_API_KEY'),
                 'units': 'metric'
             }
             response = requests.get(base_url, params=params)
